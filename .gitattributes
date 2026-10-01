@@ -1,0 +1,10 @@
+# Normalize line endings: LF in the repository, native on checkout.
+# Without this, line endings depend on each clone's core.autocrlf setting.
+* text=auto eol=lf
+
+# Treat these as binary so git never rewrites their bytes.
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff binary
+*.woff2 binary

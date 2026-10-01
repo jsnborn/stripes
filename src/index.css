@@ -1,0 +1,5 @@
+/* Placeholder. Tailwind and design tokens arrive at PR 6. */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
