@@ -41,3 +41,6 @@ pnpm-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local gstack tooling artifacts
+.gstack/
