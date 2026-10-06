@@ -28,9 +28,15 @@ export default tseslint.config(
     },
   },
 
+  // Plain JS gets the base rules; it is outside the typed project.
+  {
+    files: ['**/*.js'],
+    extends: [js.configs.recommended],
+  },
+
   // Config files run in Node and are not part of the app's tsconfig project.
   {
-    files: ['**/*.config.{js,ts}', 'eslint.config.js'],
+    files: ['**/*.config.{js,ts}'],
     extends: [tseslint.configs.disableTypeChecked],
   },
 
