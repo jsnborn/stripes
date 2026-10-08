@@ -10,9 +10,17 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Declared here rather than relying on the repository default, so the
+# workflow keeps least privilege even if that default is changed later.
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    # The job takes seconds. Without this the default ceiling is 6 hours,
+    # which is what a hung watch-mode process would burn.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
 
