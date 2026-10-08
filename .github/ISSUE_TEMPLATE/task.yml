@@ -1,0 +1,39 @@
+name: Task
+description: A PR from the plan in PROJECT_SPEC.md section 10
+title: 'type(scope): short description'
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One PR from section 10 at a time. The title should be the exact
+        Conventional Commit line from the plan, since squash merging makes
+        it the commit message on `main`.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What exists now, and why this PR is needed next.
+    validations:
+      required: true
+
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Acceptance criteria
+      description: >-
+        Each one must be checkable by running something. Prefer "a broken
+        commit fails CI" over "CI works".
+      value: |
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: What belongs to a later PR, with the PR number.
+    validations:
+      required: true
