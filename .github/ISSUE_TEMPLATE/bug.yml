@@ -1,0 +1,34 @@
+name: Bug
+description: Something behaves differently from how it should
+title: 'fix: short description'
+labels: [bug]
+body:
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
+      description: Paste the error or describe what happened instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Where
+      description: Browser and OS, or the CI run URL.

@@ -1,0 +1,22 @@
+version: 2
+
+updates:
+  # Grouped into one PR per week. Ungrouped, ~50 dev dependencies would open
+  # ~50 PRs, each needing its own green CI run under branch protection.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      all-dependencies:
+        patterns: ['*']
+
+  # PR 3's first run warned that checkout@v4 and setup-node@v4 target the
+  # deprecated Node 20, and the bump was done by hand. This catches the next one.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']
