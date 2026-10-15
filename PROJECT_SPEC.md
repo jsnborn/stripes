@@ -4,7 +4,7 @@
 
 Think roadmap.sh, but for jiu-jitsu. An interactive web app that lays out a Brazilian jiu-jitsu curriculum as a clickable learning roadmap. Users click a technique to see notes and a video, mark their progress, and get recommendations on what to learn next and where their game has gaps. A second view shows the same techniques as a map of positions and transitions on the mat.
 
-The roadmap view is the product's front door. The position map is the differentiator: a roadmap can tell you what to study, but it can't tell you that you have no escapes from mount.
+The position map is the front door and the differentiator ([ADR 0004](./docs/adr/0004-position-map-is-the-primary-view.md)): a roadmap can tell you what to study, but it can't tell you that you have no escapes from mount. The roadmap is the second view, and the only one that shows the whole curriculum at once.
 
 That split is not a guess. Several released BJJ apps already ship a structured white-to-blue curriculum with progress tracking, so the roadmap view is a commodity. None of them models positions as a graph and computes structural gaps from it. The position map and gap analysis are the defensible ground, which is why section 10 builds them before the roadmap is polished.
 
@@ -547,7 +547,7 @@ Commits the spec, the working agreement, and a refreshed README. Lands before th
 3. `ci: run typecheck, lint, and Vitest on GitHub Actions`
 4. `chore: add issue and PR templates, Dependabot, and an ADR template`
 
-**Milestone 2: Vertical slice to a live position map** (12 PRs)
+**Milestone 2: Vertical slice to a live position map** (13 PRs)
 5. `docs: add ADRs for the two-graph model, technique identity, and dual edges`
 5a. `docs: make the position map the primary view` — inserted after the PR 5 spike; lettered so nothing below renumbers
 6. `style: add Tailwind with design tokens and dark mode`
@@ -558,9 +558,9 @@ Commits the spec, the working agreement, and a refreshed README. Lands before th
 11. `feat(data): seed the v1 technique set`
 12. `feat(graph): build adjacency lists and derive dual edges` — was PR 16
 13. `feat(ui): render the position graph with React Flow` — was PR 33
-14. `feat(ui): add the position detail panel with techniques by category` — new, per ADR 0004
-15. `feat(ui): add an error boundary and designed empty states` — was PR 14
-16. `chore: deploy to Vercel with a preview on every PR` — was PR 15
+13a. `feat(ui): add the position detail panel with techniques by category` — new per ADR 0004, lettered so nothing below renumbers
+14. `feat(ui): add an error boundary and designed empty states`
+15. `chore: deploy to Vercel with a preview on every PR`
 
 Validation lands before the data, and in CI before the data, so bad ids and bad shapes fail loudly while the curriculum is being written.
 
