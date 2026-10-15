@@ -29,3 +29,4 @@ graphs over the same data is.
 | [0001](./0001-two-graph-model.md) | Model the curriculum as two graphs over one dataset | #13 |
 | [0002](./0002-technique-identity-is-move-plus-position.md) | A technique is identified by move plus starting position | #13 |
 | [0003](./0003-derive-dual-edges.md) | Derive dual edges rather than authoring the losing side | #13 |
+| [0004](./0004-position-map-is-the-primary-view.md) | The position map is the primary view | #15 |
