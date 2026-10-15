@@ -1,5 +1,94 @@
-/* Placeholder. Tailwind and design tokens arrive at PR 6. */
+@import 'tailwindcss';
+
+/* Every colour, size and radius in the app comes from this block. Tailwind 4
+   turns each entry into both a CSS variable and a utility class, so
+   --color-surface is usable as bg-surface. */
+@theme {
+  --font-sans: Geist, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-canvas: #fbfaf9;
+  --color-surface: #ffffff;
+  --color-border: #e3e0dc;
+  --color-ink: #1a1917;
+  --color-muted: #78736d;
+  --color-accent: #2f6fd0;
+
+  /* Progress levels. Section 6: paired with a glyph, never colour alone. */
+  --color-level0-fill: #ffffff;
+  --color-level0-ink: #a8a29c;
+  --color-level1-fill: #fdf6e3;
+  --color-level1-ink: #b4871f;
+  --color-level2-fill: #eaf2fd;
+  --color-level2-ink: #2f6fd0;
+  --color-level3-fill: #e9f5ec;
+  --color-level3-ink: #2e7d4f;
+
+  /* Belt colours are the brand accent, used for section markers and
+     progress only. Section 6: not splashed everywhere. */
+  --color-belt-white: #efece7;
+  --color-belt-blue: #2f6fd0;
+
+  --radius-node: 0.625rem;
+
+  --text-display: 1.5rem;
+  --text-display--line-height: 1.2;
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.4;
+}
+
+/* Dark tokens are redefined twice on purpose.
+
+   A viewer has three states, not two: an explicit choice stamps
+   data-theme on <html>, and the default "system" setting stamps nothing.
+   The media query covers system-dark, guarded so an explicit light choice
+   still wins on a dark OS. The attribute rule covers explicit dark on a
+   light OS. Only the token values change; no component restates a colour. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-canvas: #15161a;
+    --color-surface: #1e2026;
+    --color-border: #32353d;
+    --color-ink: #e9e7e4;
+    --color-muted: #8d9199;
+    --color-accent: #6fa2ec;
+
+    --color-level0-fill: #1e2026;
+    --color-level0-ink: #62666e;
+    --color-level1-fill: #2a2418;
+    --color-level1-ink: #d2a53f;
+    --color-level2-fill: #182334;
+    --color-level2-ink: #6fa2ec;
+    --color-level3-fill: #16281d;
+    --color-level3-ink: #5fb584;
+
+    --color-belt-white: #3a3832;
+    --color-belt-blue: #6fa2ec;
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-canvas: #15161a;
+  --color-surface: #1e2026;
+  --color-border: #32353d;
+  --color-ink: #e9e7e4;
+  --color-muted: #8d9199;
+  --color-accent: #6fa2ec;
+
+  --color-level0-fill: #1e2026;
+  --color-level0-ink: #62666e;
+  --color-level1-fill: #2a2418;
+  --color-level1-ink: #d2a53f;
+  --color-level2-fill: #182334;
+  --color-level2-ink: #6fa2ec;
+  --color-level3-fill: #16281d;
+  --color-level3-ink: #5fb584;
+
+  --color-belt-white: #3a3832;
+  --color-belt-blue: #6fa2ec;
+}
+
 body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
 }
