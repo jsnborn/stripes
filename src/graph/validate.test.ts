@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { techniques, validCurriculum, withTechnique } from './fixtures'
+import { techniques, validCurriculum, withPosition, withTechnique } from './fixtures'
 import { FINISH, type Curriculum, type Position } from './types'
 import { validateCurriculum } from './validate'
 
@@ -101,6 +101,32 @@ describe('shape', () => {
       techniques: [withoutNotes as (typeof techniques)[number]],
     }
     expect(kinds(broken)).toContain('bad-field')
+  })
+})
+
+describe('position shape', () => {
+  test('flags a perspective outside the union', () => {
+    const broken = withPosition('mount-top', {
+      perspective: 'sideways' as unknown as 'top',
+    })
+    expect(kinds(broken)).toContain('bad-field')
+  })
+
+  test('flags an empty name', () => {
+    const broken = withPosition('mount-top', { name: '' })
+    expect(kinds(broken)).toContain('bad-field')
+  })
+
+  test('flags a dual that is neither a string nor null', () => {
+    const broken = withPosition('mount-top', {
+      dual: undefined,
+    })
+    expect(kinds(broken)).toContain('bad-field')
+  })
+
+  test('accepts a null dual, which means the position has no other side', () => {
+    const broken = withPosition('mount-top', { dual: null })
+    expect(kinds(broken)).not.toContain('bad-field')
   })
 })
 

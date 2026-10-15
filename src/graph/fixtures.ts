@@ -76,3 +76,11 @@ export function withTechnique(targetId: string, changes: Partial<Technique>): Cu
     techniques: techniques.map((t) => (t.id === targetId ? { ...t, ...changes } : t)),
   }
 }
+
+/** The fixture with one position patched. Mirrors withTechnique. */
+export function withPosition(targetId: string, changes: Partial<Position>): Curriculum {
+  return {
+    positions: positions.map((p) => (p.id === targetId ? { ...p, ...changes } : p)),
+    techniques,
+  }
+}
