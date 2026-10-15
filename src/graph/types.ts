@@ -6,12 +6,28 @@
  * should be a compile error rather than a code review note.
  */
 
-export type Belt = 'white' | 'blue' | 'purple' | 'brown' | 'black'
+/**
+ * The unions are derived from these arrays rather than written twice, so the
+ * runtime list a validator checks against and the compile-time type cannot
+ * drift apart.
+ */
+export const BELTS = ['white', 'blue', 'purple', 'brown', 'black'] as const
+export type Belt = (typeof BELTS)[number]
 
-export type Perspective = 'top' | 'bottom' | 'neutral'
+export const PERSPECTIVES = ['top', 'bottom', 'neutral'] as const
+export type Perspective = (typeof PERSPECTIVES)[number]
 
-export type TechniqueCategory =
-  'sweep' | 'escape' | 'submission' | 'pass' | 'takedown' | 'guard-entry' | 'advance' | 'transition'
+export const CATEGORIES = [
+  'sweep',
+  'escape',
+  'submission',
+  'pass',
+  'takedown',
+  'guard-entry',
+  'advance',
+  'transition',
+] as const
+export type TechniqueCategory = (typeof CATEGORIES)[number]
 
 /**
  * The terminal node of the position graph. A submission is an edge to it.
