@@ -6,7 +6,7 @@ export function ProgressMark({ level }: { level: Level }) {
     <span
       role="img"
       aria-label={label}
-      className={`grid size-[22px] place-items-center rounded-md border border-border text-xs ${className}`}
+      className={`grid size-5.5 place-items-center rounded-md border border-border text-xs ${className}`}
     >
       {glyph}
     </span>
