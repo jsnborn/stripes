@@ -33,7 +33,11 @@ The curriculum is modeled as two separate directed graphs over the same data.
 - Must be a DAG. Cycles are a data error and must be detected.
 - Prerequisites may cross belts: a blue-to-purple technique can require a white-to-blue one.
 
-**Open risk, to be resolved before PR 7.** The learning graph's edges are hand-authored, and most BJJ techniques have no hard prerequisite. If the real graph turns out to be sparse — say under a dozen edges with a maximum depth of 2 — then `roadmapLayers` returns two layers, one of them holding most of the curriculum, and the roadmap's y-axis is not carrying information. **Before writing any code, write all 38 prerequisite lists on paper and count the edges and the longest chain.** Section 6 records both layout options and the trigger for choosing between them. The position graph earns its keep regardless; the learning graph is the one that has to prove it has content behind it.
+**Open risk, largely retired by [ADR 0004](./docs/adr/0004-position-map-is-the-primary-view.md).** The learning graph's edges are hand-authored and most BJJ techniques have no hard prerequisite, so this graph was always at risk of being too sparse to layer. That mattered while `roadmapLayers` was the roadmap's layout engine. It no longer is: prerequisites now order techniques *within* a position, where a sparse graph is expected rather than a failure.
+
+The paper exercise — writing all 38 prerequisite lists by hand and counting the edges and the longest chain — is still worth doing before authoring the curriculum in PR 11, because it is how the author discovers which prerequisites are real. It is **no longer blocking PR 7**.
+
+What remains live is a smaller question, deferred to whenever the data exists: if the prerequisite edges turn out to carry nothing at all, a superseding ADR should remove them rather than leave a DAG nobody reads.
 
 ### 2.3 Modeling principle: a technique is (move + position)
 
@@ -334,16 +338,19 @@ Using [fast-check](https://fast-check.dev/):
 
 ## 5. MVP features
 
-1. **Roadmap view:** the learning graph laid out top to bottom using `roadmapLayers`. See section 6 for how rows and position grouping relate — they are not two axes.
-2. **Position map view:** the position graph with pan and zoom. Nodes colored by perspective; technique edges colored by progress level; dual edges rendered more faintly than authored ones.
-3. **Technique drawer:** notes, category, prerequisites, same-`family` variants, embedded video with attribution, the user's own note, and a progress selector.
-4. **Learn next panel:** `learnNext`, ordered by `roadmapLayers`, highlighted on the roadmap.
-5. **Gaps panel:** `gapAnalysis`, `canReachFinish`, and `positionComponents` together — "you have nothing from here", "you cannot reach a submission from here", "these positions are cut off from your game".
-6. **Path finder:** pick a start, highlight the shortest known path to a finish. A supporting detail, not a headline.
-7. **User notes:** free text per technique. The one place a user writes into the app.
-8. **Persistence:** `UserData` in localStorage, with export and import as JSON.
-9. **Sample progress:** a one-click canned profile a first-time visitor can apply and clear, so the differentiator does not open in its degenerate state (section 5.1).
-10. **Responsive:** a designed mobile layout. **Desktop-first, explicitly** — see the sync limitation in 5.1.
+**The position map is the primary view** and loads first ([ADR 0004](./docs/adr/0004-position-map-is-the-primary-view.md)).
+
+1. **Position map view:** the position graph with pan and zoom. Nodes colored by perspective; technique edges colored by progress level; dual edges rendered more faintly than authored ones.
+2. **Position detail:** selecting a position lists its techniques grouped by `category` — attacks, sweeps, escapes, passes — with a toggle to the dual position. This is the app's main navigation, and it is a lookup plus a group-by over `from` and `category`, needing no data the model does not already carry.
+3. **Roadmap view:** the full curriculum on one screen, grouped by position section. Secondary, and the only view that shows everything at once.
+4. **Technique drawer:** notes, category, prerequisites, same-`family` variants, embedded video with attribution, the user's own note, and a progress selector.
+5. **Learn next panel:** `learnNext`, ordered by `roadmapLayers`, highlighted on whichever view is open.
+6. **Gaps panel:** `gapAnalysis`, `canReachFinish`, and `positionComponents` together — "you have nothing from here", "you cannot reach a submission from here", "these positions are cut off from your game".
+7. **Path finder:** pick a start, highlight the shortest known path to a finish. A supporting detail, not a headline.
+8. **User notes:** free text per technique. The one place a user writes into the app.
+9. **Persistence:** `UserData` in localStorage, with export and import as JSON.
+10. **Sample progress:** a one-click canned profile a first-time visitor can apply and clear, so the differentiator does not open in its degenerate state (section 5.1).
+11. **Responsive:** a designed mobile layout. **Desktop-first, explicitly** — see the sync limitation in 5.1.
 
 The belt filter UI is not in v1 (only one belt exists), but nothing in the UI should hardcode "white belt".
 
@@ -389,10 +396,13 @@ The app should look like a polished product, not a class project.
 - **The graph is the hero — whichever graph the user is looking at.** Chrome stays minimal so the canvas gets the space. The position map is the differentiated view and gets equal design investment to the roadmap, not leftovers.
 - Belt colors are the brand accent, used for section markers and progress, not splashed everywhere.
 
-### The roadmap's y-axis
-Feature 1 must not claim two axes. **Layering is global: a technique's row is its prerequisite depth across the whole curriculum, and position grouping is visual only** — color bands and labels, not a second vertical ordering. With two techniques per position, per-section layering would be trivially degenerate.
+### The roadmap's y-axis — resolved
 
-**Fallback, triggered by the section 2.2 check.** If the hand-authored prerequisite graph turns out to have fewer than about 15 edges or a maximum depth of 2, the layered y-axis is not carrying information. In that case the roadmap's rows become belt then position section, `roadmapLayers` stays as an algorithm exercise with tests, and it stops being the layout engine. Decide this before PR 12, not after.
+**The fallback was taken.** [ADR 0004](./docs/adr/0004-position-map-is-the-primary-view.md) makes the position map primary and the roadmap a list grouped by position section. `roadmapLayers` stays as an algorithm with tests and is no longer the layout engine.
+
+It was triggered by judgment rather than by the edge count this section originally specified. The PR 5 spike showed the failure is sideways, not shallow: every technique with no prerequisite lands in layer 0, which with real data means roughly half the curriculum in one row about 3400px wide. Orphaned techniques also read as entry points purely because nothing lists them as a prerequisite, which is a claim the layout has no business making.
+
+The original rule, kept for the record: *layering is global, a technique's row is its prerequisite depth across the whole curriculum, and position grouping is visual only.* Nothing below the `md` breakpoint changes — the roadmap was always a grouped list there.
 
 ### System
 - **Tailwind CSS** with design tokens (colors, spacing, radius, font sizes) as CSS variables defined once.
@@ -520,7 +530,11 @@ Concepts I had to understand to build this.
 
 Each line is one PR. Order matters.
 
-**Two ordering principles.** First, ship the differentiator early: a white-to-blue curriculum list is a commodity, a position graph that finds structural holes is not. Second, never ship a view before the data it needs exists — `gapAnalysis` and progress-colored edges are meaningless without saved progress, so Milestone 4 precedes the position map, and the shell and drawer precede it too so that clicking the map does something.
+**Two ordering principles.** First, ship the differentiator early: a white-to-blue curriculum list is a commodity, a position graph that finds structural holes is not. Second, never ship a view before the data it needs exists.
+
+**Amended by [ADR 0004](./docs/adr/0004-position-map-is-the-primary-view.md).** The first principle now applies much harder — the position map moved from PR 33 to PR 13 and is the primary view.
+
+The second principle originally put Milestone 4 before the position map, because `gapAnalysis` and progress-colored edges need saved progress. That reasoning still holds **for those two features**, which stay in Milestone 6. It does not hold for the map itself: the position detail panel lists a position's techniques by category and is entirely meaningful with no progress data, showing every technique at level 0. The map ships first; the features that need progress still wait for it.
 
 **PR 0: Documentation** — numbered 0 so nothing below shifts.
 0. `docs: add project spec and working agreement`
@@ -533,23 +547,29 @@ Commits the spec, the working agreement, and a refreshed README. Lands before th
 3. `ci: run typecheck, lint, and Vitest on GitHub Actions`
 4. `chore: add issue and PR templates, Dependabot, and an ADR template`
 
-**Milestone 2: Vertical slice to a live roadmap** (11 PRs)
+**Milestone 2: Vertical slice to a live position map** (12 PRs)
 5. `docs: add ADRs for the two-graph model, technique identity, and dual edges`
+5a. `docs: make the position map the primary view` — inserted after the PR 5 spike; lettered so nothing below renumbers
 6. `style: add Tailwind with design tokens and dark mode`
 7. `feat(graph): add domain types`
 8. `feat(graph): validate curriculum ids, references, and shape`
 9. `ci: validate curriculum data on every PR`
 10. `feat(data): add shared positions with duals`
 11. `feat(data): seed the v1 technique set`
-12. `feat(graph): compute roadmap layers from prerequisites`
-13. `feat(ui): render the roadmap with React Flow custom nodes`
-14. `feat(ui): add an error boundary and designed empty states`
-15. `chore: deploy to Vercel with a preview on every PR`
+12. `feat(graph): build adjacency lists and derive dual edges` — was PR 16
+13. `feat(ui): render the position graph with React Flow` — was PR 33
+14. `feat(ui): add the position detail panel with techniques by category` — new, per ADR 0004
+15. `feat(ui): add an error boundary and designed empty states` — was PR 14
+16. `chore: deploy to Vercel with a preview on every PR` — was PR 15
 
-Validation lands before the data, and in CI before the data, so bad ids and bad shapes fail loudly while the curriculum is being written. **Before PR 7, do the paper exercise in section 2.2**; before PR 12, settle the y-axis per section 6.
+Validation lands before the data, and in CI before the data, so bad ids and bad shapes fail loudly while the curriculum is being written.
+
+**Run `/plan-eng-review` before PR 12.** Section 11 scheduled it for Milestone 6, "when the UI architecture decisions go live". ADR 0004 moved those decisions here: the adjacency structure, where progress state lives, and how both views share selection. The trigger arrived early, so the review does too. **Run `/plan-design-review` before PR 13**, now that the position map is the hero view rather than the second one.
+
+The paper exercise in section 2.2 no longer blocks PR 7. Do it before PR 11, where it informs the curriculum the author writes.
 
 **Milestone 3: Graph algorithms** (tests commit first, then the author's implementation)
-16. `feat(graph): build adjacency lists and derive dual edges`
+16. `feat(graph): compute roadmap layers from prerequisites` — moved here from PR 12 by ADR 0004. An algorithm with tests, ordering techniques within a position; no longer a layout engine.
 17. `feat(graph): validate position graph connectivity with BFS`
 18. `feat(graph): detect prerequisite cycles with DFS`
 19. `feat(graph): compute the learn-next frontier and gap counts`
@@ -575,8 +595,10 @@ Export/import sits immediately behind persistence rather than twenty PRs later: 
 
 These come before the position map so that clicking a node on the differentiator opens something, and the gaps and path panels have a layout to live in.
 
-**Milestone 6: Position map — the differentiator** (6 PRs)
-33. `feat(ui): render the position graph with React Flow`
+**Milestone 6: Position map — the progress-dependent half** (5 PRs)
+
+PR 33 moved to PR 13 under [ADR 0004](./docs/adr/0004-position-map-is-the-primary-view.md). What stays here is everything that genuinely needs saved progress, which is the second ordering principle still doing its job.
+
 34. `feat(ui): color by perspective and progress, add a legend`
 35. `feat(ui): add the gaps panel with reachability and components`
 36. `feat(ui): add the path finder with graph highlighting`
@@ -613,9 +635,9 @@ The comprehension gate can block a PR but must never block the project. If the a
 
 `positionComponents` is the likeliest candidate. If Tarjan's single-pass lowlink bookkeeping will not stick, use **Kosaraju** instead: two ordinary depth-first passes, one on the graph and one on its transpose. Slower in theory, far easier to hold in your head, and the transpose pass is already built for `canReachFinish`.
 
-### Open question, deliberately unresolved
+### Open question, resolved early
 
-**Which view loads by default.** Section 5 lists the roadmap first; the position map is the differentiated view and ships earlier. Revisit at PR 37, when the view switcher makes both visible side by side.
+**Which view loads by default** was meant to be revisited at PR 37. [ADR 0004](./docs/adr/0004-position-map-is-the-primary-view.md) answered it at PR 5a instead: the position map. The PR 5 spike made the roadmap's weakness concrete sooner than the plan expected, which is what a spike is for.
 
 ### Deferred to v2
 
