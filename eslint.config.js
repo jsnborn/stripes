@@ -25,6 +25,19 @@ export default tseslint.config(
     plugins: { 'react-refresh': reactRefresh },
     rules: {
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
+      // ignoreRestSiblings covers omitting a property via rest destructuring,
+      // which is how a test builds "the same object without this field".
+      // The ^_ patterns mark a binding as deliberately unused.
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          ignoreRestSiblings: true,
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
     },
   },
 
