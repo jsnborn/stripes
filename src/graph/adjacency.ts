@@ -53,6 +53,12 @@ export function buildAdjacency(curriculum: Curriculum): PositionGraph {
   out.set(FINISH, [])
 
   for (const technique of curriculum.techniques) {
+    // Checked before the edge is filed, not after. An unknown id means the
+    // caller skipped validateCurriculum; dropping the edge silently would
+    // leave a graph quietly short an edge rather than obviously broken.
+    const from = positionsById.get(technique.from)
+    if (!from) throw unknownPosition(technique.id, technique.from)
+
     push(out, technique.from, {
       from: technique.from,
       to: technique.to,
@@ -64,17 +70,8 @@ export function buildAdjacency(curriculum: Curriculum): PositionGraph {
     // report being armbarred as a way to reach a finish.
     if (isFinish(technique.to)) continue
 
-    // Past the FINISH check, both endpoints must be real positions. Reaching
-    // here with an unknown id means the caller skipped validateCurriculum, and
-    // silently dropping the edge would leave a graph that is quietly short an
-    // edge rather than obviously broken.
-    const from = positionsById.get(technique.from)
     const to = positionsById.get(technique.to)
-    if (!from || !to) {
-      throw new Error(
-        `Technique "${technique.id}" names an unknown position. Run validateCurriculum first.`,
-      )
-    }
+    if (!to) throw unknownPosition(technique.id, technique.to)
 
     const mirroredFrom = dualOf(from)
     const mirroredTo = dualOf(to)
@@ -94,4 +91,10 @@ export function buildAdjacency(curriculum: Curriculum): PositionGraph {
 function push(out: Map<string, Edge[]>, nodeId: string, edge: Edge): void {
   const edges = out.get(nodeId)
   if (edges) edges.push(edge)
+}
+
+function unknownPosition(techniqueId: string, positionId: string): Error {
+  return new Error(
+    `Technique "${techniqueId}" names unknown position "${positionId}". Run validateCurriculum first.`,
+  )
 }

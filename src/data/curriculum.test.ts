@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest'
-import { PERSPECTIVES } from '../graph/types'
+import { buildAdjacency } from '../graph/adjacency'
+import { FINISH, PERSPECTIVES } from '../graph/types'
 import { validateCurriculum } from '../graph/validate'
 import { curriculum, loadCurriculum } from './curriculum'
 
@@ -71,5 +72,20 @@ describe('loadCurriculum', () => {
   test('names the offending position in the message', () => {
     const broken = [{ ...positions[0]!, dual: 'nowhere' }]
     expect(() => loadCurriculum(broken, [])).toThrow(/standing/)
+  })
+})
+
+describe('the position graph over real positions', () => {
+  const graph = buildAdjacency(curriculum)
+
+  test('has a node for every position plus finish', () => {
+    expect(graph.out.size).toBe(positions.length + 1)
+    expect(graph.out.has(FINISH)).toBe(true)
+  })
+
+  test('is entirely empty until techniques arrive at PR 11', () => {
+    for (const edges of graph.out.values()) {
+      expect(edges).toEqual([])
+    }
   })
 })

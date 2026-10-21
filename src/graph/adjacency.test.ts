@@ -1,7 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import { buildAdjacency, dualOf } from './adjacency'
 import { derivationCurriculum, derivationTechniques, positions, validCurriculum } from './fixtures'
-import { curriculum as realCurriculum } from '../data/curriculum'
 import { FINISH, type Edge } from './types'
 
 const byId = new Map(positions.map((p) => [p.id, p]))
@@ -127,18 +126,15 @@ describe('invalid input', () => {
   test('does not throw on a submission, whose target is never a position', () => {
     expect(() => buildAdjacency(derivationCurriculum)).not.toThrow()
   })
-})
 
-describe('the real positions', () => {
-  const graph = buildAdjacency(realCurriculum)
-
-  test('every one of the seventeen is a key', () => {
-    expect(graph.out.size).toBe(realCurriculum.positions.length + 1)
-  })
-
-  test('all empty until techniques arrive at PR 11', () => {
-    for (const edges of graph.out.values()) {
-      expect(edges).toEqual([])
+  // The endpoint check used to run after the authored edge was filed, and
+  // submissions returned before reaching it, so an unknown from on a
+  // submission vanished with no error.
+  test('throws on an unknown from even when the technique is a submission', () => {
+    const broken = {
+      positions,
+      techniques: [{ ...derivationTechniques[1]!, from: 'turtle-top' }],
     }
+    expect(() => buildAdjacency(broken)).toThrow(/turtle-top/)
   })
 })
