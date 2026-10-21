@@ -214,10 +214,10 @@ Seventeen positions plus the `finish` sentinel.
 | `mount-top` | top | `mount-bottom` |
 | `back-control-bottom` | bottom | `back-control-top` |
 | `back-control-top` | top | `back-control-bottom` |
-| `front-headlock-top` | top | `front-headlock-bottom`* |
-| `leg-entanglement-top` | top | `leg-entanglement-bottom`* |
+| `front-headlock-top` | top | `null`* |
+| `leg-entanglement-top` | top | `null`* |
 
-\* These two duals are declared so the mirrored edge has somewhere to land, which means `front-headlock-bottom` and `leg-entanglement-bottom` exist as positions with incoming edges and no outgoing techniques. That violates the invariant. **Resolve at PR 10 by one of:** adding a defensive technique from each (a front headlock escape, a leg lock escape), or setting `dual: null` on these two and accepting that being caught in them is outside v1 scope. The second is cheaper and defensible for a white-to-blue curriculum. Decide with the validator running.
+\* **Resolved at PR 10 by [ADR 0005](./docs/adr/0005-null-duals-for-front-headlock-and-leg-entanglement.md).** These originally named `front-headlock-bottom` and `leg-entanglement-bottom` as duals. Neither was a position in this table, so declaring them would have created two nodes with incoming edges and no outgoing technique — the dead end section 2.1's invariant forbids. Both are now `null`: being caught in either position is outside v1, which matches the belt test, where straight foot locks appear as attacks and neither position has a required defence. The alternative, adding both bottoms with an escape each, is recorded in the ADR along with why it lost.
 
 Deferred to post-v1: `turtle-bottom` / `turtle-top`, which need their own outgoing techniques before they can exist without breaking the invariant.
 

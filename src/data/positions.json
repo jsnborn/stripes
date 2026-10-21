@@ -1,0 +1,121 @@
+[
+  {
+    "id": "standing",
+    "name": "Standing",
+    "perspective": "neutral",
+    "dual": null,
+    "description": "TODO: review. Both people on the feet, nobody on the ground yet."
+  },
+  {
+    "id": "closed-guard-bottom",
+    "name": "Closed Guard (Bottom)",
+    "perspective": "bottom",
+    "dual": "closed-guard-top",
+    "description": "TODO: review. On your back with your legs locked around their waist."
+  },
+  {
+    "id": "closed-guard-top",
+    "name": "Closed Guard (Top)",
+    "perspective": "top",
+    "dual": "closed-guard-bottom",
+    "description": "TODO: review. Kneeling or standing inside their locked legs, needing to open the guard before passing."
+  },
+  {
+    "id": "open-guard-bottom",
+    "name": "Open Guard (Bottom)",
+    "perspective": "bottom",
+    "dual": "open-guard-top",
+    "description": "TODO: review. On your back or seated with legs unlocked, using feet and grips to control the distance."
+  },
+  {
+    "id": "open-guard-top",
+    "name": "Open Guard (Top)",
+    "perspective": "top",
+    "dual": "open-guard-bottom",
+    "description": "TODO: review. Standing or kneeling in front of their open legs, looking to pass."
+  },
+  {
+    "id": "butterfly-guard-bottom",
+    "name": "Butterfly Guard (Bottom)",
+    "perspective": "bottom",
+    "dual": "butterfly-guard-top",
+    "description": "TODO: review. Seated with both feet hooked inside their thighs."
+  },
+  {
+    "id": "butterfly-guard-top",
+    "name": "Butterfly Guard (Top)",
+    "perspective": "top",
+    "dual": "butterfly-guard-bottom",
+    "description": "TODO: review. Kneeling against a seated opponent whose hooks are inside your legs."
+  },
+  {
+    "id": "half-guard-bottom",
+    "name": "Half Guard (Bottom)",
+    "perspective": "bottom",
+    "dual": "half-guard-top",
+    "description": "TODO: review. On your side with one of their legs trapped between yours."
+  },
+  {
+    "id": "half-guard-top",
+    "name": "Half Guard (Top)",
+    "perspective": "top",
+    "dual": "half-guard-bottom",
+    "description": "TODO: review. One leg trapped, working to free it and settle into side control."
+  },
+  {
+    "id": "side-control-bottom",
+    "name": "Side Control (Bottom)",
+    "perspective": "bottom",
+    "dual": "side-control-top",
+    "description": "TODO: review. Flat on your back with them pinning you from the side, no legs in between."
+  },
+  {
+    "id": "side-control-top",
+    "name": "Side Control (Top)",
+    "perspective": "top",
+    "dual": "side-control-bottom",
+    "description": "TODO: review. Chest to chest across their torso, past their legs."
+  },
+  {
+    "id": "mount-bottom",
+    "name": "Mount (Bottom)",
+    "perspective": "bottom",
+    "dual": "mount-top",
+    "description": "TODO: review. Flat on your back with them seated on your torso."
+  },
+  {
+    "id": "mount-top",
+    "name": "Mount (Top)",
+    "perspective": "top",
+    "dual": "mount-bottom",
+    "description": "TODO: review. Seated on their torso with both knees on the mat."
+  },
+  {
+    "id": "back-control-bottom",
+    "name": "Back Control (Bottom)",
+    "perspective": "bottom",
+    "dual": "back-control-top",
+    "description": "TODO: review. Them behind you with hooks in, defending your neck."
+  },
+  {
+    "id": "back-control-top",
+    "name": "Back Control (Top)",
+    "perspective": "top",
+    "dual": "back-control-bottom",
+    "description": "TODO: review. Behind them with hooks or a body triangle, hunting the neck."
+  },
+  {
+    "id": "front-headlock-top",
+    "name": "Front Headlock (Top)",
+    "perspective": "top",
+    "dual": null,
+    "description": "TODO: review. Controlling their head and an arm with them facing down in front of you. Dual is null per ADR 0005."
+  },
+  {
+    "id": "leg-entanglement-top",
+    "name": "Leg Entanglement (Top)",
+    "perspective": "top",
+    "dual": null,
+    "description": "TODO: review. Legs tangled with one of theirs isolated for a straight foot lock. Dual is null per ADR 0005."
+  }
+]
