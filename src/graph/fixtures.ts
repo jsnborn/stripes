@@ -35,6 +35,22 @@ export const positions: readonly Position[] = [
     dual: 'mount-top',
     description: 'Flat on your back with them sitting on you.',
   },
+  {
+    // Neutral: both people are here, so it is its own dual.
+    id: 'standing',
+    name: 'Standing',
+    perspective: 'neutral',
+    dual: null,
+    description: 'Both on the feet.',
+  },
+  {
+    // Scoped out by ADR 0005: no bottom side exists, so nothing mirrors into it.
+    id: 'leg-entanglement-top',
+    name: 'Leg Entanglement (Top)',
+    perspective: 'top',
+    dual: null,
+    description: 'One of their legs isolated.',
+  },
 ]
 
 export const techniques: readonly Technique[] = [
@@ -62,6 +78,39 @@ export const techniques: readonly Technique[] = [
 ]
 
 export const validCurriculum: Curriculum = { positions, techniques }
+
+/**
+ * Techniques chosen to hit every branch of dual derivation:
+ * a normal mirror, a submission, a neutral source, and a null-dual target.
+ */
+export const derivationTechniques: readonly Technique[] = [
+  ...techniques,
+  {
+    id: 'double-leg',
+    name: 'Double Leg',
+    belt: 'white',
+    from: 'standing',
+    to: 'mount-top',
+    category: 'takedown',
+    prerequisites: [],
+    notes: 'TODO: review',
+  },
+  {
+    id: 'leg-entanglement-entry',
+    name: 'Leg Entanglement Entry',
+    belt: 'white',
+    from: 'closed-guard-bottom',
+    to: 'leg-entanglement-top',
+    category: 'transition',
+    prerequisites: [],
+    notes: 'TODO: review',
+  },
+]
+
+export const derivationCurriculum: Curriculum = {
+  positions,
+  techniques: derivationTechniques,
+}
 
 /**
  * The fixture with one technique patched, for testing a single failure.

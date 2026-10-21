@@ -31,3 +31,4 @@ graphs over the same data is.
 | [0003](./0003-derive-dual-edges.md) | Derive dual edges rather than authoring the losing side | #13 |
 | [0004](./0004-position-map-is-the-primary-view.md) | The position map is the primary view | #15 |
 | [0005](./0005-null-duals-for-front-headlock-and-leg-entanglement.md) | Null duals for front headlock and leg entanglement | #24 |
+| [0006](./0006-adjacency-structure.md) | Adjacency list keyed by position, with edges that own their endpoints | #26 |
