@@ -96,3 +96,26 @@ export type UserData = {
   /** Ids no longer in the curriculum. Parked rather than deleted. */
   readonly orphaned?: Progress
 }
+
+/**
+ * One directed edge of the position graph.
+ *
+ * `from` and `to` are the edge's own endpoints and are the only thing
+ * traversal should read. On a derived edge they differ from the technique's
+ * declared endpoints by design, so reaching through to `technique.to` walks
+ * to the wrong node and returns a plausible wrong answer.
+ *
+ * `technique` is display and progress payload. Never topology.
+ */
+export type Edge = {
+  readonly from: string
+  readonly to: string
+  readonly technique: Technique
+  /** True for a mirrored edge. Derived edges never appear in study lists. */
+  readonly derived: boolean
+}
+
+/** Outgoing adjacency, keyed by position id plus FINISH. */
+export type PositionGraph = {
+  readonly out: ReadonlyMap<string, readonly Edge[]>
+}
