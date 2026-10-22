@@ -1,0 +1,384 @@
+[
+  {
+    "id": "takedown-1",
+    "name": "Takedown (1 of 3)",
+    "belt": "white",
+    "from": "standing",
+    "to": "side-control-top",
+    "category": "takedown",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "takedown-2",
+    "name": "Takedown (2 of 3)",
+    "belt": "white",
+    "from": "standing",
+    "to": "side-control-top",
+    "category": "takedown",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "takedown-3",
+    "name": "Takedown (3 of 3)",
+    "belt": "white",
+    "from": "standing",
+    "to": "closed-guard-top",
+    "category": "takedown",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "guard-pull",
+    "name": "Jump or Pull to Closed Guard",
+    "belt": "white",
+    "from": "standing",
+    "to": "closed-guard-bottom",
+    "category": "guard-entry",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "closed-guard-submission-choke",
+    "name": "Submission from Closed Guard (choke)",
+    "belt": "white",
+    "from": "closed-guard-bottom",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "closed-guard-submission-2",
+    "name": "Submission from Closed Guard (2 of 2)",
+    "belt": "white",
+    "from": "closed-guard-bottom",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "closed-guard-sweep-kneeling",
+    "name": "Sweep from Closed Guard (vs kneeling)",
+    "belt": "white",
+    "from": "closed-guard-bottom",
+    "to": "mount-top",
+    "category": "sweep",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "closed-guard-sweep-standing",
+    "name": "Sweep from Closed Guard (vs standing)",
+    "belt": "white",
+    "from": "closed-guard-bottom",
+    "to": "mount-top",
+    "category": "sweep",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "closed-guard-opening-1",
+    "name": "Opening the Closed Guard (1 of 2)",
+    "belt": "white",
+    "from": "closed-guard-top",
+    "to": "open-guard-top",
+    "category": "transition",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "closed-guard-opening-2",
+    "name": "Opening the Closed Guard (2 of 2)",
+    "belt": "white",
+    "from": "closed-guard-top",
+    "to": "open-guard-top",
+    "category": "transition",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "guard-pass-1",
+    "name": "Guard Pass (1 of 3)",
+    "belt": "white",
+    "from": "open-guard-top",
+    "to": "side-control-top",
+    "category": "pass",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "guard-pass-2",
+    "name": "Guard Pass (2 of 3)",
+    "belt": "white",
+    "from": "open-guard-top",
+    "to": "side-control-top",
+    "category": "pass",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "guard-pass-3",
+    "name": "Guard Pass (3 of 3)",
+    "belt": "white",
+    "from": "open-guard-top",
+    "to": "side-control-top",
+    "category": "pass",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "open-guard-sweep",
+    "name": "Open Guard Sweep",
+    "belt": "white",
+    "from": "open-guard-bottom",
+    "to": "side-control-top",
+    "category": "sweep",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "butterfly-entry",
+    "name": "Butterfly Guard Entry",
+    "belt": "white",
+    "from": "open-guard-bottom",
+    "to": "butterfly-guard-bottom",
+    "category": "guard-entry",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "butterfly-sweep",
+    "name": "Butterfly Guard Sweep",
+    "belt": "white",
+    "from": "butterfly-guard-bottom",
+    "to": "mount-top",
+    "category": "sweep",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "half-guard-entry",
+    "name": "Half Guard Entry",
+    "belt": "white",
+    "from": "open-guard-bottom",
+    "to": "half-guard-bottom",
+    "category": "guard-entry",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "half-guard-sweep",
+    "name": "Half Guard Sweep",
+    "belt": "white",
+    "from": "half-guard-bottom",
+    "to": "side-control-top",
+    "category": "sweep",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "leg-entanglement-entry",
+    "name": "Leg Entanglement Entry",
+    "belt": "white",
+    "from": "open-guard-bottom",
+    "to": "leg-entanglement-top",
+    "category": "transition",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "straight-foot-lock-1",
+    "name": "Straight Foot Lock (1 of 2)",
+    "belt": "white",
+    "from": "leg-entanglement-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "straight-foot-lock-2",
+    "name": "Straight Foot Lock (2 of 2)",
+    "belt": "white",
+    "from": "leg-entanglement-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "side-control-submission-1",
+    "name": "Submission from Side Control (1 of 2)",
+    "belt": "white",
+    "from": "side-control-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "side-control-submission-2",
+    "name": "Submission from Side Control (2 of 2)",
+    "belt": "white",
+    "from": "side-control-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "side-control-escape-guard",
+    "name": "Escape from Side Control (recover guard)",
+    "belt": "white",
+    "from": "side-control-bottom",
+    "to": "closed-guard-bottom",
+    "category": "escape",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "side-control-escape-reversal",
+    "name": "Escape from Side Control (reversal)",
+    "belt": "white",
+    "from": "side-control-bottom",
+    "to": "side-control-top",
+    "category": "escape",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "mount-from-side-control",
+    "name": "Mount from Side Control",
+    "belt": "white",
+    "from": "side-control-top",
+    "to": "mount-top",
+    "category": "advance",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "mount-submission-1",
+    "name": "Submission from Mount (1 of 2)",
+    "belt": "white",
+    "from": "mount-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "mount-submission-2",
+    "name": "Submission from Mount (2 of 2)",
+    "belt": "white",
+    "from": "mount-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "mount-escape-guard",
+    "name": "Escape from Mount (recover guard)",
+    "belt": "white",
+    "from": "mount-bottom",
+    "to": "closed-guard-bottom",
+    "category": "escape",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "mount-escape-ghost",
+    "name": "Escape from Mount (ghost escape)",
+    "belt": "white",
+    "from": "mount-bottom",
+    "to": "front-headlock-top",
+    "category": "escape",
+    "prerequisites": [],
+    "notes": "TODO: review. Section 2.6 requires one mount escape to land in front-headlock-top, or that position has no incoming edge."
+  },
+  {
+    "id": "back-take",
+    "name": "Back Take",
+    "belt": "white",
+    "from": "mount-top",
+    "to": "back-control-top",
+    "category": "advance",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "back-submission-1",
+    "name": "Submission from the Back (1 of 2)",
+    "belt": "white",
+    "from": "back-control-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "back-submission-2",
+    "name": "Submission from the Back (2 of 2)",
+    "belt": "white",
+    "from": "back-control-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "back-escape-1",
+    "name": "Escape from the Back (1 of 2)",
+    "belt": "white",
+    "from": "back-control-bottom",
+    "to": "side-control-bottom",
+    "category": "escape",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "back-escape-2",
+    "name": "Escape from the Back (2 of 2)",
+    "belt": "white",
+    "from": "back-control-bottom",
+    "to": "half-guard-bottom",
+    "category": "escape",
+    "prerequisites": [],
+    "notes": "TODO: review. Routing is a judgement call, not specified by section 3.2."
+  },
+  {
+    "id": "guillotine",
+    "name": "Guillotine from Front Headlock",
+    "belt": "white",
+    "from": "front-headlock-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note."
+  },
+  {
+    "id": "wrist-lock-mount",
+    "name": "Wrist Lock from Mount",
+    "belt": "white",
+    "from": "mount-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note.",
+    "family": "wrist-lock"
+  },
+  {
+    "id": "wrist-lock-side-control",
+    "name": "Wrist Lock from Side Control",
+    "belt": "white",
+    "from": "side-control-top",
+    "to": "finish",
+    "category": "submission",
+    "prerequisites": [],
+    "notes": "TODO: review. Placeholder slot from the belt test; the author names the technique and writes the note.",
+    "family": "wrist-lock"
+  }
+]

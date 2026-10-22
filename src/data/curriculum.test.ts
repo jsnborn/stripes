@@ -75,17 +75,85 @@ describe('loadCurriculum', () => {
   })
 })
 
-describe('the position graph over real positions', () => {
+describe('the real techniques', () => {
+  const { techniques } = curriculum
+
+  test('are the thirty-eight slots from spec section 3.2', () => {
+    expect(techniques).toHaveLength(38)
+  })
+
+  test('have unique ids', () => {
+    expect(new Set(techniques.map((t) => t.id)).size).toBe(techniques.length)
+  })
+
+  test('match section 3.2 group by group', () => {
+    const count = (predicate: (t: (typeof techniques)[number]) => boolean) =>
+      techniques.filter(predicate).length
+
+    expect(count((t) => t.from === 'standing' && t.category === 'takedown')).toBe(3)
+    expect(count((t) => t.from === 'closed-guard-bottom' && t.to === FINISH)).toBe(2)
+    expect(count((t) => t.from === 'closed-guard-bottom' && t.category === 'sweep')).toBe(2)
+    expect(count((t) => t.from === 'closed-guard-top')).toBe(2)
+    expect(count((t) => t.category === 'pass')).toBe(3)
+    expect(count((t) => t.from === 'leg-entanglement-top')).toBe(2)
+    expect(count((t) => t.from === 'side-control-top' && t.to === FINISH)).toBe(3)
+    expect(count((t) => t.from === 'side-control-bottom')).toBe(2)
+    expect(count((t) => t.from === 'mount-top' && t.to === FINISH)).toBe(3)
+    expect(count((t) => t.from === 'mount-bottom')).toBe(2)
+    expect(count((t) => t.from === 'back-control-top')).toBe(2)
+    expect(count((t) => t.from === 'back-control-bottom')).toBe(2)
+    expect(count((t) => t.family === 'wrist-lock')).toBe(2)
+  })
+
+  test('are all placeholders awaiting the author', () => {
+    for (const technique of techniques) {
+      expect(technique.notes).toMatch(/^TODO: review/)
+    }
+  })
+
+  test('ship with no prerequisites, since inventing them would violate section 11', () => {
+    for (const technique of techniques) {
+      expect(technique.prerequisites).toEqual([])
+    }
+  })
+})
+
+describe('the position graph over real data', () => {
   const graph = buildAdjacency(curriculum)
+  const edges = [...graph.out.values()].flat()
 
   test('has a node for every position plus finish', () => {
-    expect(graph.out.size).toBe(positions.length + 1)
+    expect(graph.out.size).toBe(curriculum.positions.length + 1)
     expect(graph.out.has(FINISH)).toBe(true)
   })
 
-  test('is entirely empty until techniques arrive at PR 11', () => {
-    for (const edges of graph.out.values()) {
-      expect(edges).toEqual([])
+  // Spec section 2.1: every position but finish has somewhere to go. Full
+  // reachability from standing is validateConnectivity at PR 17.
+  test('every position has at least one outgoing technique', () => {
+    for (const position of curriculum.positions) {
+      expect(graph.out.get(position.id)?.length ?? 0).toBeGreaterThan(0)
     }
+  })
+
+  test('nothing leaves finish', () => {
+    expect(graph.out.get(FINISH)).toEqual([])
+  })
+
+  test('derives a mirror for every technique that should have one', () => {
+    const dualless = new Set(
+      curriculum.positions
+        .filter((p) => p.dual === null && p.perspective !== 'neutral')
+        .map((p) => p.id),
+    )
+    const expected = curriculum.techniques.filter(
+      (t) => t.to !== FINISH && !dualless.has(t.to) && !dualless.has(t.from),
+    ).length
+
+    expect(edges.filter((e) => e.derived)).toHaveLength(expected)
+    expect(edges.filter((e) => !e.derived)).toHaveLength(curriculum.techniques.length)
+  })
+
+  test('no derived edge ends at finish, so losing is never an outcome you own', () => {
+    expect(edges.filter((e) => e.derived && e.to === FINISH)).toEqual([])
   })
 })
