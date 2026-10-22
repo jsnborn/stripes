@@ -1,6 +1,7 @@
 import type { Curriculum, Position, Technique } from '../graph/types'
 import { validateCurriculum } from '../graph/validate'
 import rawPositions from './positions.json'
+import rawTechniques from './white.json'
 
 /**
  * Builds a curriculum and refuses to return an invalid one.
@@ -31,5 +32,6 @@ export function loadCurriculum(
  */
 const positions = rawPositions as readonly Position[]
 
-/** Techniques arrive at PR 11. Positions alone are already worth validating. */
-export const curriculum = loadCurriculum(positions, [])
+const techniques = rawTechniques as readonly Technique[]
+
+export const curriculum = loadCurriculum(positions, techniques)
